@@ -31,17 +31,6 @@ export default class Game extends React.Component {
 
       if (this.state.time === 0) {
         clearInterval(id);
-        alert(`${this.state.xIsNext ? "O" : "X"} Wins!`);
-        this.setState({
-          startBtn: false,
-          time: 6,
-          stepNumber: 0,
-          history: [
-            {
-              squares: Array(9).fill(null),
-            },
-          ],
-        });
       }
     }, 1000);
   };
@@ -93,8 +82,8 @@ export default class Game extends React.Component {
     });
 
     let status;
-    if (winner) {
-      status = "Winner: " + winner;
+    if (winner || this.state.time <= 0) {
+      status = "Winner: " + (winner || (this.state.xIsNext ? "O" : "X"));
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
