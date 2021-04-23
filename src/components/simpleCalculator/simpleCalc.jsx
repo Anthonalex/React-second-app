@@ -52,6 +52,11 @@ export default class Calc extends React.Component {
     });
   };
 
+  handleReset = () => {
+    this.setState({
+      value: 0,
+    });
+  };
   render() {
     return (
       <div className="calc-div">
@@ -74,10 +79,12 @@ export default class Calc extends React.Component {
         =
         <input
           type="number"
-          disabled="true"
+          disabled={true}
           className="calc-input"
           value={this.state.value}
         />
+        <br />
+        <button onClick={this.handleReset}>Reset</button>
       </div>
     );
   }
