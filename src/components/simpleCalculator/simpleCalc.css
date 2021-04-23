@@ -1,0 +1,9 @@
+.calc-input {
+  width: 32px;
+  padding: 6px;
+}
+
+.calc-div button {
+  padding: 6px;
+  margin: 2px;
+}
