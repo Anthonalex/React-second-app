@@ -1,0 +1,30 @@
+.harward-data-main-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+span {
+  width: 125px;
+  height: 125px;
+  border: 1px solid #000;
+  margin: 20px;
+}
+
+.load-more-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.load-more-container button {
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.178);
+  background: #fff;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.load-more-container button:hover {
+  background: rgba(0, 0, 0, 0.699);
+  color: #fff;
+}

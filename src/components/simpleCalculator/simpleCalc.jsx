@@ -89,3 +89,4 @@ export default class Calc extends React.Component {
     );
   }
 }
+
