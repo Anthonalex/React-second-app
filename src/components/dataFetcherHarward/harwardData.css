@@ -3,11 +3,18 @@
   flex-wrap: wrap;
 }
 
-span {
-  width: 125px;
-  height: 125px;
-  border: 1px solid #000;
-  margin: 20px;
+.data-item {
+  margin: 30px;
+  height: 450px;
+  width: 300px;
+  overflow: auto;
+  border: 1px solid rgba(0, 0, 0, 0.295);
+  border-radius: 6px;
+}
+
+.data-images {
+  width: 100%;
+  height: 180px;
 }
 
 .load-more-container {
@@ -27,4 +34,10 @@ span {
 .load-more-container button:hover {
   background: rgba(0, 0, 0, 0.699);
   color: #fff;
+}
+
+#division {
+  margin-left: 20px;
+  padding: 4px;
+  font-size: 16px;
 }

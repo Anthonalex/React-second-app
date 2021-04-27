@@ -9,41 +9,79 @@ export default class HarwardDataFetcher extends React.Component {
       data: [],
       baseUrl: "https://harvardartmuseums.org/browse?load_amount=30",
       offset: 30,
+      filter: "default",
     };
   }
 
   componentDidMount() {
-    console.log("worked");
-    fetch(this.state.baseUrl)
-      .then((e) => e.json())
-      .then((data) => {
-        data.records.map((el) => {
-          this.setState((prevState) => ({
-            data: [...prevState.data, el],
-          }));
-          return el;
-        });
-      });
+    this.fetchApi();
   }
 
   handleLoadMore = () => {
-    fetch(`${this.state.baseUrl}&offset=${this.state.offset}`)
+    this.fetchApi();
+  };
+
+  fetchApi = () => {
+    const url =
+      this.state.offset <= 30
+        ? this.state.baseUrl
+        : `${this.state.baseUrl}&offset=${this.state.offset}`;
+
+    fetch(url)
       .then((e) => e.json())
       .then((data) => {
-        data.records.map((el) => {
-          this.setState((prevState) => ({
-            data: [...prevState.data, el],
-            offset: prevState.offset + 1,
-          }));
-          return el;
-        });
+        data.records
+          .filter((el) => {
+            if (
+              el.division === this.state.filter ||
+              this.state.filter === "default"
+            ) {
+              return el;
+            }
+          })
+          .map((el) => {
+            this.setState((prevState) => ({
+              data: [...prevState.data, el],
+              offset: prevState.offset + 1,
+            }));
+            return el;
+          });
       });
+  };
+
+  handleFilter = (e) => {
+    let newData = this.state.data.filter((el) => {
+      if (el.division === e.target.value) {
+        return el;
+      }
+    });
+
+    this.setState({
+      data: newData,
+      filter: e.target.value,
+    });
   };
 
   render() {
     return (
       <div>
         <h1>Harward Data Fetcher</h1>
+        <select
+          name="select-division"
+          id="division"
+          onChange={this.handleFilter}
+        >
+          <option value="default">Default</option>
+          <option value="Asian and Mediterranean Art">
+            Asian and Mediterranean Art
+          </option>
+          <option value="European and American Art">
+            European and American Art
+          </option>
+          <option value="Modern and Contemporary Art">
+            Modern and Contemporary Art
+          </option>
+        </select>
         <div className="harward-data-main-div">
           <RenderApi data={this.state.data} />
         </div>
@@ -56,5 +94,13 @@ export default class HarwardDataFetcher extends React.Component {
 }
 
 function RenderApi({ data }) {
-  return data.map((el) => <span key={el.id}>{el.title}</span>);
+  return data.map((el) => (
+    <div className="data-item">
+      <img src={el.images[0].baseimageurl} className="data-images" />
+      <p>{el.objectnumber}</p>
+      <p>{el.title}</p>
+      <p>{el.division}</p>
+      <p>{el.copyright}</p>
+    </div>
+  ));
 }
