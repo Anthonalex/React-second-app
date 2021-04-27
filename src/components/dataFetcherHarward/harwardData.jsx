@@ -10,6 +10,7 @@ export default class HarwardDataFetcher extends React.Component {
       baseUrl: "https://harvardartmuseums.org/browse?load_amount=30",
       offset: 0,
       filter: "default",
+      isLoading: false,
     };
   }
 
@@ -25,6 +26,9 @@ export default class HarwardDataFetcher extends React.Component {
   };
 
   fetchApi = () => {
+    this.setState({
+      isLoading: true,
+    });
     const url =
       this.state.data.length <= 1
         ? this.state.baseUrl
@@ -46,9 +50,13 @@ export default class HarwardDataFetcher extends React.Component {
             this.setState((prevState) => ({
               data: [...prevState.data, el],
               offset: prevState.offset + 1,
+              isLoading: false,
             }));
             return el;
           });
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 
@@ -85,7 +93,10 @@ export default class HarwardDataFetcher extends React.Component {
           <RenderApi data={this.state.data} />
         </div>
         <div className="load-more-container">
-          <button onClick={this.handleLoadMore}>Load more</button>
+          <p>{this.state.isLoading && "Loading..."}</p>
+          <button onClick={this.handleLoadMore} disabled={this.state.isLoading}>
+            Load more
+          </button>
         </div>
       </div>
     );

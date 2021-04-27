@@ -21,6 +21,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.load-more-container p {
+  font-family: "Antonio", sans-serif;
+  font-size: 36px;
 }
 
 .load-more-container button {
