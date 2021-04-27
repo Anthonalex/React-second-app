@@ -8,7 +8,7 @@ export default class HarwardDataFetcher extends React.Component {
     this.state = {
       data: [],
       baseUrl: "https://harvardartmuseums.org/browse?load_amount=30",
-      offset: 30,
+      offset: 0,
       filter: "default",
     };
   }
@@ -18,12 +18,15 @@ export default class HarwardDataFetcher extends React.Component {
   }
 
   handleLoadMore = () => {
+    this.setState((prevState) => ({
+      offset: prevState.offset + 30,
+    }));
     this.fetchApi();
   };
 
   fetchApi = () => {
     const url =
-      this.state.offset <= 30
+      this.state.data.length <= 1
         ? this.state.baseUrl
         : `${this.state.baseUrl}&offset=${this.state.offset}`;
 
@@ -50,9 +53,12 @@ export default class HarwardDataFetcher extends React.Component {
   };
 
   handleFilter = (e) => {
-    this.setState({
+    this.setState((prevState) => ({
       filter: e.target.value,
-    });
+      data: [],
+      offset: 0,
+    }));
+    this.fetchApi();
   };
 
   render() {
