@@ -96,10 +96,18 @@ function RenderApi({ data }) {
   return data.map((el) => (
     <div key={el.id} className="data-item">
       <img src={el.images[0].baseimageurl} className="data-images" />
-      <p>{el.objectnumber}</p>
-      <p>{el.title}</p>
-      <p>{el.division}</p>
-      <p>{el.copyright}</p>
+      <p>
+        <b>Object number</b> <br /> {el.objectnumber}
+      </p>
+      <p>
+        <b>Title</b> <br /> {el.title}
+      </p>
+      <p>
+        <b>Division</b> <br /> {el.division}
+      </p>
+      <p>
+        <b>{el.copyright && "Copy Right"}</b> <br /> {el.copyright}
+      </p>
     </div>
   ));
 }
