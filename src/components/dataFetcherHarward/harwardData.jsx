@@ -50,14 +50,7 @@ export default class HarwardDataFetcher extends React.Component {
   };
 
   handleFilter = (e) => {
-    let newData = this.state.data.filter((el) => {
-      if (el.division === e.target.value) {
-        return el;
-      }
-    });
-
     this.setState({
-      data: newData,
       filter: e.target.value,
     });
   };
@@ -95,7 +88,7 @@ export default class HarwardDataFetcher extends React.Component {
 
 function RenderApi({ data }) {
   return data.map((el) => (
-    <div className="data-item">
+    <div key={el.id} className="data-item">
       <img src={el.images[0].baseimageurl} className="data-images" />
       <p>{el.objectnumber}</p>
       <p>{el.title}</p>
