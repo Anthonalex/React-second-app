@@ -116,9 +116,11 @@ function RenderApi({ data }) {
       <p>
         <b>Division</b> <br /> {el.division}
       </p>
-      <p>
-        <b>{el.copyright && "Copy Right"}</b> <br /> {el.copyright}
-      </p>
+      {el.copyright && (
+        <p>
+          <b>Copy Right</b> <br /> {el.copyright}
+        </p>
+      )}
     </div>
   ));
 }
