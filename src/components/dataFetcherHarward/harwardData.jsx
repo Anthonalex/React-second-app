@@ -73,22 +73,11 @@ export default class HarwardDataFetcher extends React.Component {
     return (
       <div>
         <h1>Harward Data Fetcher</h1>
-        <select
+        <Select
           name="select-division"
           id="division"
           onChange={this.handleFilter}
-        >
-          <option value="default">Default</option>
-          <option value="Asian and Mediterranean Art">
-            Asian and Mediterranean Art
-          </option>
-          <option value="European and American Art">
-            European and American Art
-          </option>
-          <option value="Modern and Contemporary Art">
-            Modern and Contemporary Art
-          </option>
-        </select>
+        />
         <div className="harward-data-main-div">
           <RenderApi data={this.state.data} />
         </div>
@@ -123,4 +112,23 @@ function RenderApi({ data }) {
       )}
     </div>
   ));
+}
+
+function Select({ name, id, onChange }) {
+  return (
+    <div>
+      <select name={name} id={id} onChange={onChange}>
+        <option value="default">Default</option>
+        <option value="Asian and Mediterranean Art">
+          Asian and Mediterranean Art
+        </option>
+        <option value="European and American Art">
+          European and American Art
+        </option>
+        <option value="Modern and Contemporary Art">
+          Modern and Contemporary Art
+        </option>
+      </select>
+    </div>
+  );
 }
